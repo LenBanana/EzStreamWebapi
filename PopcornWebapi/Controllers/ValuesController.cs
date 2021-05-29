@@ -88,6 +88,21 @@ namespace PopcornWebapi.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("streamer/{id:guid}")]
+        public void Delete(Guid id, [FromBody] Streamer value)
+        {
+            int idx = ServerList.FindIndex(x => x.Id == id);
+            if (idx != -1)
+            {
+                int streamerIdx = ServerList[idx].streamers.FindIndex(x => x.Username == value.Username);
+                if (streamerIdx != -1)
+                {
+                    ServerList[idx].streamers.RemoveAt(streamerIdx);
+                }
+            }
+        }
+
         [HttpPut]
         [Route("video/{id:guid}")]
         public void Put(Guid id, [FromBody] VideoFile value)
