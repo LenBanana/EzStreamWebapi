@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace PopcornWebapi.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("MyPolicy")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -98,12 +97,6 @@ namespace PopcornWebapi.Controllers
             {
                 ServerList[idx].video = value;
             }
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

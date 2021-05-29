@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace PopcornWebapi
@@ -14,19 +15,14 @@ namespace PopcornWebapi
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-           .UseKestrel()
-           .UseContentRoot(Directory.GetCurrentDirectory())
-           .UseIISIntegration()
-           .UseStartup<Startup>()
-           .UseUrls("http://*:2556") // <-----
-           .Build();
-
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
