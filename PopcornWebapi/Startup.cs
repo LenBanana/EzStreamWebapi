@@ -34,7 +34,7 @@ namespace PopcornWebapi
                        .AllowCredentials(); //.WithOrigins("http://localhost:4200", "https://localhost:4200")
 
             }));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EzStream API", Version = "v0.1" });
